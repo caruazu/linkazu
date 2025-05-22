@@ -1,7 +1,18 @@
 import express from "express";
 
-const app = express();
+import conectar from "./config/dbConnect.js";
 
+
+const conexao = await conectar();
+conexao.on("error",(erro) => {
+    console.error(erro);
+});
+conexao.once("open", () => {
+    console.log("banco conectado")
+});
+
+
+const app = express();
 app.use(express.json()); // Middleware para analisar o corpo da requisição como JSON
 
 
