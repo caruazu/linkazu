@@ -1,5 +1,6 @@
 import express from "express";
 
+import links from "./model/link.js"
 import conectar from "./config/dbConnect.js";
 
 
@@ -11,46 +12,8 @@ conexao.once("open", () => {
     console.log("banco conectado")
 });
 
-
 const app = express();
 app.use(express.json()); // Middleware para analisar o corpo da requisição como JSON
-
-
-const links = [
-  {
-    id: 1,
-    titulo: "Google",
-    url: "https://www.google.com",
-  },
-  {
-    id: 2,
-    titulo: "Facebook",
-    url: "https://www.facebook.com",
-  },
-  {
-    id: 3,
-    titulo: "Twitter",
-    url: "https://www.twitter.com",
-  },
-  {
-    id: 4,
-    titulo: "Instagram",
-    url: "https://www.instagram.com",
-  },
-  {
-    id: 5,
-    titulo: "LinkedIn",
-    url: "https://www.linkedin.com",
-  },
-];
-
-
-function linkGetByIndex(id) {
-    return links.findIndex( livro => {
-        return livro.id == Number(id);
-    });
-}
-
 
 
 app.get("/", (req, res) => {
@@ -90,8 +53,9 @@ app.delete("/link/:id", (req, res) => {
 });
 
 // listar links
-app.get("/link", (req, res) => {
-  res.status(200).json(links);
+app.get("/link", async (req, res) => {
+  const linksLista = await links.find({})
+  res.status(200).json(linksLista);
 });
 
 export default app;
