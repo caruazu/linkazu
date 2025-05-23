@@ -6,7 +6,7 @@ const linkSchema = new mongoose.Schema({
   url: { type: String, required: true },
 },
 { 
-    versionKey: false 
+  versionKey: false 
 });
 
 const link = mongoose.model("links", linkSchema);
