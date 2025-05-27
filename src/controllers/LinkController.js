@@ -1,3 +1,4 @@
+import { categoria } from "../models/CategoriaModel.js";
 import link from "../models/LinkModel.js";
 
 class LinkController {
@@ -11,9 +12,12 @@ class LinkController {
   }
 
   static async linkCriar(req, res) {
+    const body = req.body;
     try {
-      const linkNovo = await link.create(req.body);
-      res.status(201).json(linkNovo);
+      const categoriaDB = await categoria.findById(body.categoria)
+      const linkNovo = { ...body, categoria: { ...categoriaDB._doc } };
+      const linkDB = await link.create(linkNovo);
+      res.status(201).json(linkDB);
     } catch (error) {
       res.status(500).json(error);
     }
