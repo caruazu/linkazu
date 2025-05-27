@@ -52,6 +52,17 @@ class LinkController {
       res.status(500).json(error);
     }
   }
+
+  static async linkListarPorTitulo (req, res) {
+    const query = req.query.titulo
+    try {
+      const linkListarPorTituloDB = await link.find({ titulo: query });
+      res.status(200).json(linkListarPorTituloDB);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  }
+
 };
 
 export default LinkController;

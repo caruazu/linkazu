@@ -4,6 +4,7 @@ import LinkController from "../controllers/LinkController.js";
 const linkRoutes = express.Router();
 
 linkRoutes.get("/link", LinkController.linkListar);
+linkRoutes.get("/link/busca", LinkController.linkListarPorTitulo);
 linkRoutes.post("/link", LinkController.linkCriar);
 linkRoutes.get("/link/:id", LinkController.linkLer);
 linkRoutes.put("/link/:id", LinkController.linkAtualizar);
