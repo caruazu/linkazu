@@ -1,5 +1,8 @@
 # linkazu
 Um local para você divulgar seus links
 
-# Inicialização
+## Instação
+`npm install`
+
+## Inicialização
 `npm run dev`
